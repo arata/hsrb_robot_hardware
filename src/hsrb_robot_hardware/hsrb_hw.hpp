@@ -37,7 +37,8 @@ DAMAGE.
 #include <string>
 #include <vector>
 
-#include <hardware_interface/base_interface.hpp>
+// #include <hardware_interface/base_interface.hpp>
+
 #include <hardware_interface/system_interface.hpp>
 #include <rclcpp/rclcpp.hpp>
 
@@ -52,11 +53,13 @@ namespace hsrb_robot_hardware {
 // TODO(Takeshita) Test that it can be loaded as a plugin
 
 template<class Network, class Protocol, class JointComm, class GripperComm, class Joint, class Gripper>
-class HsrbHwBase : public hardware_interface::BaseInterface<hardware_interface::SystemInterface> {
+// class HsrbHwBase : public hardware_interface::BaseInterface<hardware_interface::SystemInterface> {
+class HsrbHwBase : public hardware_interface::SystemInterface {
  public:
   virtual ~HsrbHwBase() = default;
 
-  hardware_interface::return_type configure(const hardware_interface::HardwareInfo& info) override;
+  //hardware_interface::return_type configure(const hardware_interface::HardwareInfo& info) override;
+  CallbackReturn on_init(const hardware_interface::HardwareInfo & info) override;
 
   std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
   std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
